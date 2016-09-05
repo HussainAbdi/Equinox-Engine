@@ -1,0 +1,12 @@
+#pragma once
+#include <SFML/Graphics.hpp>
+#include "Ball.h"
+#include "Planet.h"
+#include "Arrow.h"
+#include <iostream>
+#include "EquiMath.h"
+#include <sstream>
+#include "Wormhole.h"
+#include <string>
+#include "Global.h"
+#include "Asteroid.h"
