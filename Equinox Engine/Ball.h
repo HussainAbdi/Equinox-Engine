@@ -20,7 +20,7 @@ public:
 	sf::Vector2f m_force;
 	Ball(float radius,float posX, float posY);
 	~Ball();
-	void circOrbit(Wormhole * goal, float dt);
+	void circOrbit(Planet * planet, float dt);
 	void thrustVelocity(sf::Vector2f force, float time); // inital thrust
 	void update(vector<Planet> planets,float dt, Wormhole *goal,vector<Asteroid> asteroids);
 	void updateObjs(vector<Planet> planets, Wormhole *goal, vector <Asteroid> asteroids);

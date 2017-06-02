@@ -24,18 +24,28 @@ Ball::~Ball()
 	//m_centre.y = this->getPosition().y;
 //}
 
-void Ball::circOrbit(Wormhole * goal, float dt) {
-	sf::Vector2f orbRadius(this->getPosition().x - goal->getPosition().x, this->getPosition().y - goal->getPosition().y);
+void Ball::circOrbit(Planet * planet, float dt) {
+	sf::Vector2f orbRadius(this->getPosition().x - planet->getPosition().x, this->getPosition().y - planet->getPosition().y);
+	sf::Vector2f pos = this->getPosition();
 	//cout << orbRadius.x << "," << orbRadius.y << endl;
+	
 	sf::Vector2f orbRadiusSquared(orbRadius.x*orbRadius.x, orbRadius.y*orbRadius.y);
 	float magnitude = sqrtf(orbRadiusSquared.x + orbRadiusSquared.y);
 	sf::Vector2f orbRadiusUnitVec = orbRadius / magnitude;
 	//cout << orbRadiusUnitVec.x << "," << orbRadiusUnitVec.y << endl;
 	sf::Vector2f velocityUnitVec(orbRadiusUnitVec.y *(-1),orbRadiusUnitVec.x);
 	//cout << velocityUnitVec.x << "," << velocityUnitVec.y << endl;
-	float velocityX = (sqrtf(goal->getMass() / orbRadius.x))* velocityUnitVec.x;
-	float velocityY = (sqrtf(goal->getMass() / orbRadius.y))* velocityUnitVec.y;
-	m_velocity = sf::Vector2f(velocityX, velocityY);
+	//float velocityX = (sqrtf(goal->getMass() / orbRadius.x))* velocityUnitVec.x;
+	//float velocityY = (sqrtf(goal->getMass() / orbRadius.y))* velocityUnitVec.y;
+	//m_velocity = sf::Vector2f(velocityX, velocityY);
+	//Using v = 2*PI*r*invTime
+	float time = 100;
+	float invTime = 1 / time;
+	float velocityX = 2 * PI*orbRadius.x*invTime*velocityUnitVec.x;
+	float velocityY = 2 * PI*orbRadius.y*invTime*velocityUnitVec.y;
+	m_velocity += sf::Vector2f(velocityX, velocityY);
+	pos += m_velocity *dt;
+	this->setPosition(pos);
 	//cout << m_velocity.x << "," << m_velocity.y << endl;
 	//sf::Vector2f pos(this->getPosition());
 	//pos += m_velocity *dt;

@@ -16,16 +16,16 @@ void customPlanets(vector<Planet> *planets);
 void demoPlanets(vector<Planet> *planets);
 int main() {
 	// Start of setup
-	const int height = 900;
-	const int width = 1600;
+	const int wheight = 900;
+	const int wwidth = 1600;
 	const float fps = 100;
 	sf::Time accumulator = sf::Time::Zero;
 	float dt = 1.f / fps;
 	sf::Time clamp = sf::seconds(0.02f);
-	sf::RenderWindow window(sf::VideoMode(width, height), "Equinox");
+	sf::RenderWindow window(sf::VideoMode(wwidth, wheight), "Equinox");
 	vector<Planet> planets;
 	vector<Asteroid> asteroids;
-	Ball shape1(20.f, 50.f,100.f); //(1000.f,300.f) Orbit 1
+	Ball shape1(20.f, 50.f, 100.f); //(1000.f, 300.f) Orbit 1 
 	Ball *p_shape1 = &shape1;
 	InitPlanets(&planets);
 	//Planet planet1(&planets,50.f, 400.f, 225.f); //400.f, 225.f UNCOMMENT
@@ -80,7 +80,7 @@ int main() {
 	sf::Clock clock;
 
 	while (window.isOpen()) {
-		int looptime = 0;
+		//int looptime = 0;
 		accumulator += clock.getElapsedTime();
 		clock.restart();
 		if (accumulator.asSeconds() > clamp.asSeconds())
@@ -107,8 +107,8 @@ int main() {
 				if (event.key.code == sf::Mouse::Left) {
 					if (ballYSet) {
 						if (!ballThrust) {
-							sf::Vector2f force = arrow.getForce(); //UNCOMMENT 
-							p_shape1->thrustVelocity(force, 1); //UNCOMMENT
+							sf::Vector2f force = arrow.getForce();
+							p_shape1->thrustVelocity(force, 1); 
 							//orbVelocity(p_shape1,goal); //Orbit
 							ballThrust = true;
 						}
@@ -160,8 +160,9 @@ int main() {
 		}
 		while (accumulator.asSeconds() > dt) {
 			//p_shape1->circOrbit(&goal, dt);
-			if (!gameover && !win && ballYSet && ballThrust) 
+			if (!gameover && !win && ballYSet && ballThrust)
 				p_shape1->update(planets, dt, &goal, asteroids); //UNCOMMENT
+				//p_shape1->circOrbit(&planets[0], dt);
 			goal.rotate(1);
 			if (!gameover) {
 				for (int i = 0; i < asteroids.size(); i++) {
@@ -169,7 +170,6 @@ int main() {
 					asteroids[i].circOrbit(); //Circular orbit
 				}
 			}
-			
 			
 			//p_shape1->update(&goal, dt);
 			accumulator -= sf::seconds(dt);
@@ -316,7 +316,7 @@ void InitPlanets(vector<Planet> *planets) {
 	int choice;
 	cout << "Would you like to: " << endl;
 	cout << "1) Use a pre-existing demo" << endl;
-	cout << "2) Set-up custom planets" << endl;
+	cout << "2) Set-up custom suns" << endl;
 	do
 	getline(cin, mystr);
 	while (stoi(mystr) < 1 && stoi(mystr) > 2);
@@ -338,7 +338,7 @@ void customPlanets(vector<Planet> *planets) {
 	float planetRadius;
 	float planetX;
 	float planetY;
-	cout << "How many planets would you like to have?" << endl;
+	cout << "How many suns would you like to have?" << endl;
 	getline(cin, mystr);
 	planetNum = stoi(mystr);
 	for (int i = 0; i < planetNum; i++) {
