@@ -62,5 +62,4 @@
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
 
-$ cat .gitattributes
-*.rb linguist-language=Java
+*.rb linguist-language=C++
